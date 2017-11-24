@@ -112,7 +112,39 @@ router.get('/update',(req,res,next)=>{
 
 router.get('/all',(req,res,next)=>{
     Personnel.find().then((data)=>{
-        sendResponseData(res,'查询成功',100,data);
+        /*  数据整理  */
+        let newData = data.toObject();
+        let stackData = {
+            test : [],
+            web : [],
+            operating : [],
+            design : [],
+            server : []
+        };
+        let stack = (data)=>{
+            switch (data.position){
+                case 1 :
+                    stackData.operating.spush(data);
+                    break;
+                case 2 :
+                    stackData.design.push(data);
+                    break;
+                case 3 :
+                    stackData.web.push(data);
+                    break;
+                case 4 :
+                    stackData.server.push(data);
+                    break;
+                case 5 :
+                    stackData.test.push(data);
+                    break;
+            }
+        };
+
+        newData.map((item,index)=>{
+            stack(item);
+        });
+        sendResponseData(res,'查询成功',100,stackData);
     });
 });
 
