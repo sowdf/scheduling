@@ -140,4 +140,71 @@ router.get('/all',(req,res,next)=>{
     })
 });
 
+/*
+* 排期所有活动
+* */
+router.get('/scheduling/all',(req,res,next)=>{
+    let {query:{year,month}} = req;
+    if(!year || !month ){
+        return sendResponseData(res,'参数错误',90);
+    };
+    let proxyMonth = Number(month);
+    let proxyNextMonth = proxyMonth + 1 > 12 ? 1 : proxyMonth + 1;
+    //日期和星期
+    let stackDatePicker = (()=>{
+        let proxyNowDate = Util.getMonthAry(year,month);
+        let proxyNextDate = Util.getMonthAry(year,proxyNextMonth);
+        let proxyDate = [proxyNowDate.date,proxyNextDate.date];
+        let proxyWeek = [proxyNextDate.week,proxyNextDate.week];
+        return {proxyDate,proxyWeek};
+    })();
+    Activitles.find().then((data)=>{
+        let responseData = {
+            year : year,
+            month : [
+                proxyMonth,
+                proxyNextMonth
+            ],
+            date : stackDatePicker.proxyDate,
+            week : stackDatePicker.proxyWeek,
+            list : data
+        };
+        sendResponseData(res,'查询成功',100,responseData);
+    });
+});
+
+
+/*
+* 排期编辑
+* */
+router.get('/scheduling/edit',(req,res,next)=>{
+    let {query:{actId,month}} = req;
+    if(!year || !month ){
+        return sendResponseData(res,'参数错误',90);
+    };
+    let proxyMonth = Number(month);
+    let proxyNextMonth = proxyMonth + 1 > 12 ? 1 : proxyMonth + 1;
+    //日期和星期
+    let stackDatePicker = (()=>{
+        let proxyNowDate = Util.getMonthAry(year,month);
+        let proxyNextDate = Util.getMonthAry(year,proxyNextMonth);
+        let proxyDate = [proxyNowDate.date,proxyNextDate.date];
+        let proxyWeek = [proxyNextDate.week,proxyNextDate.week];
+        return {proxyDate,proxyWeek};
+    })();
+    Activitles.find().then((data)=>{
+        let responseData = {
+            year : year,
+            month : [
+                proxyMonth,
+                proxyNextMonth
+            ],
+            date : stackDatePicker.proxyDate,
+            week : stackDatePicker.proxyWeek,
+            list : data
+        };
+        sendResponseData(res,'查询成功',100,responseData);
+    });
+});
+
 module.exports = router;

@@ -15,5 +15,25 @@ module.exports = new mongoose.Schema({
     endDay : Number,
     createTime : String,
     principal : String,
-    activeType : Number
+    activeType : Number,
+    web : {
+        default:[],
+        type : Object
+    },
+    server : {
+        default:[],
+        type : Object
+    },
+    operating : {
+        default:[],
+        type : Object
+    },
+    test : {
+        default:[],
+        type : Object
+    },
+    design : {
+        default:[],
+        type : Object
+    }
 });

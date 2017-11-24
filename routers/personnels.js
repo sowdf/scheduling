@@ -113,7 +113,7 @@ router.get('/update',(req,res,next)=>{
 router.get('/all',(req,res,next)=>{
     Personnel.find().then((data)=>{
         /*  数据整理  */
-        let newData = data.toObject();
+        let newData = data;
         let stackData = {
             test : [],
             web : [],
@@ -124,7 +124,7 @@ router.get('/all',(req,res,next)=>{
         let stack = (data)=>{
             switch (data.position){
                 case 1 :
-                    stackData.operating.spush(data);
+                    stackData.operating.push(data);
                     break;
                 case 2 :
                     stackData.design.push(data);
@@ -147,6 +147,8 @@ router.get('/all',(req,res,next)=>{
         sendResponseData(res,'查询成功',100,stackData);
     });
 });
+
+
 
 
 
