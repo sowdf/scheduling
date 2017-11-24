@@ -68,7 +68,7 @@ router.get('/add',(req,res,next)=>{
         if(data){
             return sendResponseData(res,'该活动已存在',99);
         }
-        return new Activitles(saveData);
+        return new Activitles(saveData).save();
     }).then(()=>{
         sendResponseData(res,'保存成功',100);
     });
@@ -85,7 +85,6 @@ router.get('/update',(req,res,next)=>{
     if(!actId || !startTimestamp || !endTimestamp || !name || !principal || !activeType){
         return sendResponseData(res,'参数错误',90);
     };
-
     let saveData = {
         name : name,
         principal : principal,
@@ -102,7 +101,7 @@ router.get('/update',(req,res,next)=>{
         if(!data){
             return sendResponseData(res,'修改的活动不存在',99);
         }
-        return Activitles.update({_id : id},saveData);
+        return Activitles.update({_id : actId},saveData);
     }).then(()=>{
         sendResponseData(res,'修改成功',100);
     });

@@ -17,11 +17,11 @@ class Util{
         return currentdate;
     }
     static timestampConvert(timestamp){
-        let date = new Date(timestamp);
-        let   year=date.getYear();
+        let date = new Date(Number(timestamp));
+        let   year=date.getFullYear();
         let   month=date.getMonth()+1;
-        let   date=date.getDate();
-        return {year,month,date};
+        let   day=date.getDate();
+        return {year,month,day};
     }
 }
 module.exports = Util;
