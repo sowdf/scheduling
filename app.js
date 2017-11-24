@@ -25,7 +25,7 @@ mongoose.connect('mongodb://localhost:27017/operating',(err)=>{
         if(err){
             return console.log(err);
         }
-        console.log('this is port 9090 starting');
+        console.log('this is port 3000 starting');
     });
 });
 
