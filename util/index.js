@@ -78,5 +78,14 @@ class Util{
         }
         return {date,week,monthAry};
     }
+    static isTimestampOverlap(obj1,obj2){
+        if(obj2.start <= obj2.start &&obj2.start <=obj1.end){
+            return true;
+        }
+        if(obj2.start <= obj2.end &&obj2.end <=obj1.end){
+            return true;
+        }
+        return false;
+    }
 }
 module.exports = Util;

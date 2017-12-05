@@ -12,10 +12,10 @@ app.use(express.static(path.join(__dirname,'public/web/build')));
 app.use(bodyParser.urlencoded({extended:true}));
 
 let personnels = require('./routers/personnels');
-let activitles = require('./routers/activitles');
+let activities = require('./routers/activities');
 
 app.use('/api/personnels',personnels);
-app.use('/api/activitles',activitles);
+app.use('/api/activities',activities);
 
 mongoose.connect('mongodb://localhost:27017/operating',(err)=>{
     if(err){
